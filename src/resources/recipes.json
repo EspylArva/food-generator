@@ -1,0 +1,63 @@
+[
+    {
+        "id": "chicken-risotto",
+        "ingredients": [
+            {
+                "id": "chicken",
+                "category": "meat"
+            },
+            {
+                "id": "rice",
+                "category": "grain"
+            },
+            {
+                "id": "carrot",
+                "category": "vegetable"
+            }
+        ],
+        "time": 30,
+        "difficulty": 2,
+        "tags": ["easy", "quick"]
+    },
+    {
+        "id": "beef-stew",
+        "ingredients": [
+            {
+                "id": "beef",
+                "category": "meat"
+            },
+            {
+                "id": "potato",
+                "category": "vegetable"
+            },
+            {
+                "id": "carrot",
+                "category": "vegetable"
+            }
+        ],
+        "time": 60,
+        "difficulty": 3,
+        "tags": ["slow-cooker", "hearty"]
+    },
+    {
+        "id": "vegetable-stir-fry",
+        "ingredients": [
+            {
+                "id": "carrot",
+                "category": "vegetable"
+            },
+            {
+                "id": "broccoli",
+                "category": "vegetable"
+            },
+            {
+                "id": "soy-sauce",
+                "category": "sauce",
+                "optional": true
+            }
+        ],
+        "time": 20,
+        "difficulty": 1,
+        "tags": ["quick", "vegetarian"]
+    }
+]

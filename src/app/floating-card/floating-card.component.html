@@ -1,0 +1,5 @@
+<p-card #floating_card 
+    [style]="{'position': 'fixed', 'left': position.x, 'top': position.y, 'z-index': '1000', 'pointer-events': 'none'}">
+    <h1>{{ ingredient.id }}</h1>
+    <p><strong>Category:</strong> {{ ingredient.category }}</p>
+</p-card>

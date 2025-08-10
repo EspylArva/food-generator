@@ -1,0 +1,133 @@
+<main class="main card">
+    <p-table [value]="recipes" 
+            dataKey="id"
+            [paginator]="true" [rows]="20" [rowsPerPageOptions]="[5, 10, 20]"
+            sortMode="multiple"
+            [globalFilterFields]="['id', 'time', 'difficulty', 'tags']"
+            selectionMode="single" [(selection)]="selectedRecipe"
+            (selectionChange)="select($event)"
+            [expandedRowKeys]="expandedRows"
+            [tableStyle]="{ 'min-width': '50rem' }" stripedRows #data_table>
+        <ng-template #caption>
+            <div class="table-tools">
+                <p-button label="Clear" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(data_table)" />
+                <p-iconfield iconPosition="left">
+                    <p-inputicon>
+                        <i class="pi pi-search"></i>
+                    </p-inputicon>
+                    <input style="height: 40px;" pInputText type="text" (input)="handleInput($event, data_table)" placeholder="Search keyword" />
+                </p-iconfield>
+            </div>
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th style="width: 5rem"></th>
+                <th pSortableColumn="id">
+                    <div class="table-header">
+                        <span>Name</span> 
+                        <p-sortIcon field="id"/> <p-columnFilter type="text" field="id" display="menu" filterOn="input"></p-columnFilter>
+                    </div>
+                </th>
+                <th pSortableColumn="time">
+                    <div class="table-header">
+                        <span>Time</span>
+                        <p-sortIcon field="time"/> <p-columnFilter type="numeric" field="time" display="menu" filterOn="input"></p-columnFilter>
+                    </div>
+                </th>
+                <th pSortableColumn="difficulty">
+                    <div class="table-header">
+                        <span>Difficulty</span>
+                        <p-sortIcon field="difficulty"/> <p-columnFilter type="numeric" field="difficulty" display="menu" filterOn="input"></p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="table-header">
+                        <span>Tags</span>
+                        <p-columnFilter field="tags" matchMode="listInList" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                            <ng-template #filter let-tag let-filter="filterCallback">
+                                <p-multiselect (ngModel)="tag" [options]="tags" 
+                                placeholder="Select a tag" 
+                                (onChange)="filter($event.value)" 
+                                style="min-width: 10rem" [panelStyle]="{ minWidth: '10rem' }">
+                                <!-- (onChange)="filter($event.value)" -->
+                                    <ng-template let-option #item>
+                                        <div class="flex items-center gap-2">
+                                            <!-- <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" style="width: 32px" /> -->
+                                            <span>{{ option }}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-multiselect>
+                            </ng-template>
+                        </p-columnFilter>
+                    </div>
+                </th>
+
+                <th>
+                    <div class="table-header">
+                        <span>Ingredients</span>
+                        <p-columnFilter field="ingredients" matchMode="listInList" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                            <ng-template #filter let-ingredient let-filter="filterCallback">
+                                <p-multiselect (ngModel)="ingredient" [options]="ingredients" 
+                                placeholder="Select an ingredient" 
+                                (onChange)="filter($event.value)" optionLabel="id" 
+
+                                style="min-width: 10rem" [panelStyle]="{ minWidth: '10rem' }">
+                                <!-- (onChange)="filter($event.value)" -->
+                                    <ng-template let-option #item>
+                                        <div class="flex items-center gap-2">
+                                            <!-- <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" style="width: 32px" /> -->
+                                            <span>{{ option.id }}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-multiselect>
+                            </ng-template>
+                        </p-columnFilter>
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-recipe let-expanded="expanded">
+            <tr [pSelectableRow]="recipe">
+                <td>
+                    <p-button type="button" pRipple [pRowToggler]="recipe" [text]="true" severity="secondary" [rounded]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+                </td>
+                <td>{{ recipe.id }}</td>
+                <td>{{ recipe.time }}</td>
+                <td>{{ recipe.difficulty }}</td>
+                <td>
+                    @for (item of recipe.tags; track item) {
+                        <p-chip class="prime-pill tags" [label]="item" icon="fa fa-tag"/>
+                    }
+                </td>
+                <td>
+                    @for (item of recipe.ingredients; track item) {
+                        <p-chip [ngClass]="{ 
+                            'prime-pill': true, 
+                            'meat': item.category === 'meat', 
+                            'vegetable': item.category === 'vegetable'
+                            }"
+                            [label]="item.id"
+                            [icon]="getIcon(item.category)"
+                            (mouseover)="showFloatingCard($event, item)"
+                            (mouseleave)="hideFloatingCard($event, item)"/>
+                    }
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template #expandedrow let-recipe>
+            <tr>
+                <td colspan="7">
+                    <div class="p-4">
+                        <h5>Instructions or details for {{ recipe.id }} (Feature to be implemented)</h5>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template #emptymessage>
+            <tr>
+                <td colspan="5">No customers found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <app-floating-card *ngIf="showCard" [ingredient]="selectedIngredient" [position]="cardPosition"></app-floating-card>
+</main>
