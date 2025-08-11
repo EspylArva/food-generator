@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Menubar } from 'primeng/menubar';
-import { MenuItem } from 'primeng/api';
+import { FilterService, MenuItem } from 'primeng/api';
 import { ThemeSwitcherComponent } from './theme-switcher/theme-switcher.component';
 import { HomeComponent } from "./home/home.component";
 
@@ -18,9 +18,29 @@ import { HomeComponent } from "./home/home.component";
 })
 export class AppComponent implements OnInit {
   items: MenuItem[] | undefined;
+
+
+  private filterService = inject(FilterService)
+
   
   ngOnInit() {
-    this.items = [
+    // Initialize the menu items    
+    this.items = this.getMenubarItems();
+
+    // Register common filter for list of items
+    this.filterService.register('listInList', (value: string[], filter: string[]) => { 
+      if (!filter || filter.length === 0) { return true; }
+      if (!value || value.length === 0) { return false; }
+
+      for (let f of filter) {
+        if (value.some(v => JSON.stringify(v) === JSON.stringify(f))) { return true };
+      }
+      return false;
+
+    });
+  }
+  getMenubarItems() : MenuItem[] {
+    return [
       {
         label: 'Home',
         icon: 'fa fa-home',
@@ -52,7 +72,7 @@ export class AppComponent implements OnInit {
         icon: 'fa fa-question-circle',
         routerLink: '/information'
       }
-    ]
+    ];
   }
 
   hide(event: any) {

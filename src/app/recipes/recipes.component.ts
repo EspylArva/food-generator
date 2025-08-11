@@ -16,7 +16,6 @@ import { TooltipModule } from 'primeng/tooltip';
 
 import { CommonModule } from '@angular/common';
 
-import { FilterService } from 'primeng/api';
 import { RecipeService } from '../services/recipe.service';
 import { IconUtils } from '../utils/icons';
 import { FloatingCardComponent } from "../floating-card/floating-card.component";
@@ -39,7 +38,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
   expandedRows: { [s: string]: boolean; } = {};
   
   private recipeService = inject(RecipeService);
-  private filterService = inject(FilterService)
   
   recipes: Recipe[] = [];
 
@@ -67,17 +65,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
       console.info(`Recipes loaded (${this.recipes.length}): [${this.recipes.map(r => r.id).join(', ')}]`);
     });
     this.recipeService.getIngredients().subscribe(ingredients => {this.ingredients = ingredients;});
-
-    this.filterService.register('listInList', (value: string[], filter: string[]) => { 
-      if (!filter || filter.length === 0) { return true; }
-      if (!value || value.length === 0) { return false; }
-
-      for (let f of filter) {
-        if (value.some(v => JSON.stringify(v) === JSON.stringify(f))) { return true };
-      }
-      return false;
-
-    });
   }
 
   ngOnDestroy(): void {

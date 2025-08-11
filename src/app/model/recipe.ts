@@ -7,3 +7,8 @@ export interface Recipe {
     difficulty?: number;
     tags?: string[];
 }
+
+export interface GeneratedRecipe extends Recipe {
+    done: boolean;
+    keep: boolean;
+}

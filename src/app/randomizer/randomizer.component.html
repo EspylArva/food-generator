@@ -1,1 +1,82 @@
-<p>randomizer works!</p>
+<span class="randomizer-button" (click)="generateRecipe(history_table)">Generate a recipe</span>
+
+<div class="card">
+    <p-toolbar>
+        <ng-template #start>
+        </ng-template>
+        <ng-template #center>
+        </ng-template>
+        <ng-template #end>
+            <p-toggleswitch [(ngModel)]="isFilterRestrictive">
+                <ng-template #handle let-checked="checked">
+                    <i [ngClass]="['!text-xs', 'fa', checked ? 'fa-times' : 'fa-plus']"></i>
+                </ng-template>
+            </p-toggleswitch>
+        </ng-template>
+    </p-toolbar>
+    <div class="filters-container">
+        <p-tree selectionMode="checkbox" [value]="carbs"      [(selection)]="selectedCarbs"/>
+        <p-tree selectionMode="checkbox" [value]="vegetables" [(selection)]="selectedVegetables"/>
+        <p-tree selectionMode="checkbox" [value]="proteins"   [(selection)]="selectedProteins"/>
+        <p-tree selectionMode="checkbox" [value]="optionals"  [(selection)]="selectedOptionals"/>
+    </div>
+</div>
+<div class="card history-container">
+    <p-table [value]="generatedRecipes" 
+            sortMode="single"
+            [paginator]="true" [rows]="10" 
+            [scrollable]="true" #history_table>
+        <ng-template #header>
+        <tr>
+            <th pSortableColumn="id">
+                <div class="table-header">
+                    <span>Name</span>
+                    <p-sortIcon field="id"/>
+                </div>
+            </th>
+            <th>
+                <div class="table-header">
+                    <span>Ingredients</span>
+                    <p-columnFilter field="ingredients" matchMode="listInList" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                        <ng-template #filter let-ingredient let-filter="filterCallback">
+                            <p-multiselect (ngModel)="ingredient" [options]="ingredients" 
+                            placeholder="Select an ingredient" 
+                            (onChange)="filter($event.value)" optionLabel="id" 
+                            style="min-width: 10rem" [panelStyle]="{ minWidth: '10rem' }">
+                                <ng-template let-option #item>
+                                    <div class="flex items-center gap-2">
+                                        <!-- <img [alt]="option.label" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" style="width: 32px" /> -->
+                                        <span>{{ option.id }}</span>
+                                    </div>
+                                </ng-template>
+                            </p-multiselect>
+                        </ng-template>
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th>
+                <div class="table-header">
+                    <span>Keep recipe</span>
+                    <p-columnFilter type="boolean" field="keep" display="menu" />
+
+                </div>
+            </th>
+            <th>
+                <div class="table-header">
+                    <span>Recipe done</span>
+                    <p-columnFilter type="boolean" field="done" display="menu" />
+
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-recipe>
+        <tr>
+            <td>{{ recipe.id }}</td>
+            <td>{{ recipe.ingredients }}</td>
+            <td><p-checkbox [(ngModel)]="recipe.keep" [binary]="true" /></td>
+            <td><p-checkbox [(ngModel)]="recipe.done" [binary]="true" /></td>
+        </tr>
+    </ng-template>
+    </p-table>
+</div>
