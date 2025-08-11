@@ -22,13 +22,46 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+[![GNU License][license-shield]][license-url]
 
-# CookEat
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/EspylArva/food-generator">
+    <img src="https://github.com/EspylArva/food-generator/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="Logo" width="80" height="80">
+  </a>
 
-## Deployment
+<h3 align="center">Food Generator</h3>
+  Half-way between a pokemon randomizer and a recipe book. Embrace the chaos and experiment with food.
+  <p align="center">
+    <br />
+    <a href="https://github.com/EspylArva/food-generator"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/EspylArva/food-generator"><s>View Demo</s></a>
+     · 
+    <a href="https://github.com/EspylArva/food-generator/issues">Report Bug</a>
+     · 
+    <a href="https://github.com/EspylArva/food-generator/issues">Request Feature</a>
+  </p>
+</div>
+
+## About The Project
+Web app for when you don't want to think about what to make for dinner but still want balanced food. 
+Also helps tracking your recipes.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Built With
+
+* [![Angular][Angular-badge]][Angular-url]
+* [![PrimeNG][PrimeNG-badge]][PrimeNG-url]
+* [![FontAwesome][FontAwesome-badge]][FontAwesome-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Getting Started
 
 To start a local development server, run:
 
@@ -51,10 +84,12 @@ This will compile your project and store the build artifacts in the `dist/` dire
 - [ ] Randomizer page
     - [ ] Randomize using ingredients or ingredient types
     - [ ] Randomize using tags
-    - [ ] Add History of N last generated
+    - [ ] Add History of generated recipes
+        - [ ] Persist history
+
 - [ ] Recipes page
     - [ ] Hovering ingredient shows details
-    - [ ] Filtering and Ordering
+    - [x] Filtering and Ordering
     - [ ] Clicking a recipe shows details of recipe
 - [ ] Ingredients page
     - [ ] Filtering and Ordering
@@ -69,3 +104,32 @@ This will compile your project and store the build artifacts in the `dist/` dire
     - [ ] Fix Light/Dark mode switcher
     - [ ] Add and manage localizations
     - [ ] Add recipes
+
+
+## Acknowledgments
+- README template by <a href="https://github.com/othneildrew">othneildrew</a>
+
+
+<!-- LINKS -->
+
+[Angular-badge]: https://img.shields.io/badge/Angular-0F0F11?style=for-the-badge&logo=angular
+[PrimeNG-badge]: https://img.shields.io/badge/PrimeNG-DD0031?style=for-the-badge&logo=primeng
+[FontAwesome-badge]: https://img.shields.io/badge/Font%20Awesome-3D03A7?style=for-the-badge&logo=fontawesome
+[Angular-url]: https://kotlinlang.org
+[PrimeNG-url]: https://kotlinlang.org
+[FontAwesome-url]: https://kotlinlang.org
+
+
+[contributors-shield]: https://img.shields.io/github/contributors/EspylArva/food-generator.svg?style=for-the-badge
+[contributors-url]: https://github.com/EspylArva/food-generator/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/EspylArva/food-generator.svg?style=for-the-badge
+[forks-url]: https://github.com/EspylArva/food-generator/network/members
+[stars-shield]: https://img.shields.io/github/stars/food-generator/repo_name.svg?style=for-the-badge
+[stars-url]: https://github.com/EspylArva/food-generator/stargazers
+[issues-shield]: https://img.shields.io/github/issues/EspylArva/food-generator.svg?style=for-the-badge
+[issues-url]: https://github.com/EspylArva/food-generator/issues
+[license-shield]: https://img.shields.io/github/license/EspylArva/food-generator.svg?style=for-the-badge
+[license-url]: https://github.com/EspylArva/food-generator/blob/master/LICENSE.txt
+[release-url]: https://github.com/EspylArva/food-generator/releases
+[nightly-build]: https://github.com/EspylArva/food-generator/tree/master
+[latest-stable-build]: https://github.com/EspylArva/food-generator/releases/latest
