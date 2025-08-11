@@ -115,10 +115,9 @@ This will compile your project and store the build artifacts in the `dist/` dire
 [Angular-badge]: https://img.shields.io/badge/Angular-0F0F11?style=for-the-badge&logo=angular
 [PrimeNG-badge]: https://img.shields.io/badge/PrimeNG-DD0031?style=for-the-badge&logo=primeng
 [FontAwesome-badge]: https://img.shields.io/badge/Font%20Awesome-3D03A7?style=for-the-badge&logo=fontawesome
-[Angular-url]: https://kotlinlang.org
-[PrimeNG-url]: https://kotlinlang.org
-[FontAwesome-url]: https://kotlinlang.org
-
+[Angular-url]: https://angular.dev/
+[PrimeNG-url]: https://primeng.org/
+[FontAwesome-url]: https://fontawesome.com/
 
 [contributors-shield]: https://img.shields.io/github/contributors/EspylArva/food-generator.svg?style=for-the-badge
 [contributors-url]: https://github.com/EspylArva/food-generator/graphs/contributors
