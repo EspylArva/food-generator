@@ -17,59 +17,38 @@ export class IngredientCategoryService {
     proteins : TreeNode[] = [];
     optionals : TreeNode[] = [];
 
-    private readonly ingredientToTreeNode = (ingredient: Ingredient): TreeNode => {
-        return {
-            label: ingredient.id,
-            data: { type: ingredient.category, optional: ingredient.optional }
-        }
+    private readonly ingredientToTreeNode = (ingredients: Ingredient[]) => {
+        return ingredients.map(ingredient => { 
+            return {
+                label: ingredient.id,
+                data: { type: ingredient.category, optional: ingredient.optional }
+            };
+        });
     };
 
-    private readonly ingredientFilter: (cats: IngredientCategory[]) => ((ingredient: Ingredient) => boolean) = (categories: IngredientCategory[]) => {
-        return (ingredient: Ingredient) => categories.map(category => ingredient.category === category).reduce((acc, current) => acc || current, false) 
-    }
+    
 
     getCarbs(): Observable<TreeNode[]> {
-        return this.recipeService.getIngredients().pipe(
-            map<Ingredient[], TreeNode[]>(ingredients => {
-                return ingredients.filter(this.ingredientFilter([IngredientCategory.grain]))
-                    .map(this.ingredientToTreeNode);
-            })
+        return this.recipeService.getCarbsIngredients().pipe(
+            map<Ingredient[], TreeNode[]>(ingredients => this.ingredientToTreeNode(ingredients))
         );
     }
 
     getVegetables(): Observable<TreeNode[]> {
-        return this.recipeService.getIngredients().pipe(
-            map<Ingredient[], TreeNode[]>(ingredients => {
-                return ingredients.filter(this.ingredientFilter([IngredientCategory.vegetable, IngredientCategory.fruit]))
-                    .map(this.ingredientToTreeNode);
-            })
+        return this.recipeService.getVegetablesIngredients().pipe(
+            map<Ingredient[], TreeNode[]>(ingredients => this.ingredientToTreeNode(ingredients))
         );
     }
 
     getProteins(): Observable<TreeNode[]> {
-        return this.recipeService.getIngredients().pipe(
-            map<Ingredient[], TreeNode[]>(ingredients => {
-                return ingredients.filter(this.ingredientFilter([IngredientCategory.meat]))
-                    .map(this.ingredientToTreeNode);
-            })
+        return this.recipeService.getProteinsIngredients().pipe(
+            map<Ingredient[], TreeNode[]>(ingredients => this.ingredientToTreeNode(ingredients))
         );
     }
 
     getOptionals(): Observable<TreeNode[]> {
-        return this.recipeService.getIngredients().pipe(
-            map<Ingredient[], TreeNode[]>(ingredients => {
-                return ingredients.filter(ingredient => {
-                    return ![
-                        // Carbs
-                        IngredientCategory.grain,
-                        // Vegetables
-                        IngredientCategory.vegetable, IngredientCategory.fruit, 
-                        // Proteins
-                        IngredientCategory.meat, 
-                    ].includes(ingredient.category);
-                })
-                    .map(this.ingredientToTreeNode);
-            })
+        return this.recipeService.getOptionalsIngredients().pipe(
+            map<Ingredient[], TreeNode[]>(ingredients => this.ingredientToTreeNode(ingredients))
         );
     }
 }

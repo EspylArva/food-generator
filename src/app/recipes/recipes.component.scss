@@ -72,20 +72,13 @@
     letter-spacing: -0.00875rem;
     text-decoration: none;
 }
+
 .prime-pill:hover {
     background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
 }
 
 .prime-pill.tags {
     --pill-accent: var(--electric-violet);
-}
-
-.prime-pill.meat {
-    --pill-accent: var(--hot-red);
-}
-
-.prime-pill.vegetable {
-    --pill-accent: var(--greens);
 }
 
 .pill-group svg {

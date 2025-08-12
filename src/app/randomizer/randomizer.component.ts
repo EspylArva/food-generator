@@ -4,6 +4,7 @@ import { TreeModule } from 'primeng/tree';
 import { TreeNode } from 'primeng/api';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { ChipModule } from 'primeng/chip';
 
 
 import { IngredientCategoryService } from '../services/ingredient-category.service';
@@ -15,12 +16,16 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { MultiSelect } from 'primeng/multiselect';
 import { RecipeService } from '../services/recipe.service';
 import { Ingredient } from '../model/ingredient';
+import { IconUtils } from '../utils/icons';
+import { FloatingCardComponent } from '../../ui/floating-card/floating-card.component';
+import { IngredientChipComponent } from '../../ui/ingredient-card/ingredient-chip.component';
 
 
 
 @Component({
   selector: 'app-randomizer',
   imports: [
+    IngredientChipComponent, FloatingCardComponent,
     TreeModule, ToolbarModule,
     ToggleSwitchModule,
     CommonModule, FormsModule, CheckboxModule, MultiSelect,
@@ -54,7 +59,12 @@ export class RandomizerComponent implements OnInit {
   selectedOptionals: any;
 
   generatedRecipes: GeneratedRecipe[] = [];
-  ingredients: any[]|undefined;
+  ingredients: Ingredient[] = [];
+
+  // Floating card
+  showCard = false;
+  selectedIngredient: any;
+  cardPosition = { x: 0, y: 0 };
   
   ngOnInit(): void {
     this.nodeService.getCarbs().subscribe(carbs => this.carbs = [{ label: 'Carbs', children: carbs, expanded: true }]);
@@ -66,26 +76,65 @@ export class RandomizerComponent implements OnInit {
   }
 
   generateRecipe(arg: any) {
-    console.log('Generating recipe with restrictive filters:', this.isFilterRestrictive);
-    console.log("Carbs: ", this.selectedCarbs);
-    console.log("Vegetables: ", this.selectedVegetables);
-    console.log("Proteins: ", this.selectedProteins);
-    console.log("Optionals: ", this.selectedOptionals);
+    const ingredients = this.generateRecipeIngredients();
 
-    const ingredients : Ingredient[] = [];
-
+    // Assign a value to trigger change detection (don't push)
     this.generatedRecipes = [...this.generatedRecipes, {
       id: this.generateRecipeName(ingredients),
       ingredients: ingredients,
-      keep: false,
-      done: false,
+      keep: false, done: false,
     }];
-
   }
 
   private generateRecipeName(ingredients: Ingredient[]) : string {
     return "Recipe " + Math.floor(Math.random() * 100);
   }
+
+  private generateRecipeIngredients() : Ingredient[] {
+    const recipeIngredients: Ingredient[] = [];
+
+    this.recipeService.getCarbsIngredients().subscribe(ingredients => {
+      recipeIngredients.push(...this.getIngredient(ingredients, this.selectedCarbs));
+    });
+
+    this.recipeService.getVegetablesIngredients().subscribe(ingredients => {
+      recipeIngredients.push(...this.getIngredient(ingredients, this.selectedVegetables));
+    });
+
+    this.recipeService.getProteinsIngredients().subscribe(ingredients => {
+      recipeIngredients.push(...this.getIngredient(ingredients, this.selectedProteins));
+    });
+
+    this.recipeService.getOptionalsIngredients().subscribe(ingredients => {
+      recipeIngredients.push(...this.getIngredient(ingredients, this.selectedOptionals));
+    });
+
+    return recipeIngredients;
+  }
+
+  private getRandom(ceil: number): number {
+    return Math.floor(Math.random() * ceil);
+  }
+
+  private getIngredient(ingredients: Ingredient[], filteredIngredients: TreeNode[]) : Ingredient[] {
+    if (this.isFilterRestrictive && filteredIngredients) {         // If filter is restrictive, add all selected ingredients
+      return ingredients.filter(ingredient => filteredIngredients.some(i => i.label === ingredient.id));
+    } else if (!this.isFilterRestrictive && filteredIngredients){  // If filter is inclusive, add a random ingredient among selection
+      return [ingredients.find(ingredient => ingredient.id === filteredIngredients[this.getRandom(filteredIngredients.length)].label)!];
+    } else  {                                                      // If nothing selected, add a random ingredient from all available
+      return [ingredients[this.getRandom(ingredients.length)]];
+    }
+  }
+
+  // Floating card
+  showFloatingCard(event: MouseEvent, ingredient: any) {
+    this.selectedIngredient = ingredient;
+    this.cardPosition = { x: event.clientX, y: event.clientY };
+    this.showCard = true;
+  }
   
+  hideFloatingCard(event: MouseEvent, ingredient: any) {
+    this.showCard = false;
+  }
 
 }

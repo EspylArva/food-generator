@@ -18,7 +18,8 @@ import { CommonModule } from '@angular/common';
 
 import { RecipeService } from '../services/recipe.service';
 import { IconUtils } from '../utils/icons';
-import { FloatingCardComponent } from "../floating-card/floating-card.component";
+import { FloatingCardComponent } from "../../ui/floating-card/floating-card.component";
+import { IngredientChipComponent } from "../../ui/ingredient-card/ingredient-chip.component";
 
 @Component({
   selector: 'app-recipes',
@@ -28,7 +29,8 @@ import { FloatingCardComponent } from "../floating-card/floating-card.component"
     InputGroupAddonModule, InputIconModule, InputTextModule,
     TagModule, MultiSelectModule, SelectModule, CommonModule,
     CommonModule,
-    FloatingCardComponent
+    FloatingCardComponent,
+    IngredientChipComponent
 ],
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.scss'
@@ -56,7 +58,6 @@ export class RecipesComponent implements OnInit, OnDestroy {
   showCard = false;
   selectedIngredient: any;
   cardPosition = { x: 0, y: 0 };
-  hideTimeout: any;
 
   ngOnInit(): void {
 
@@ -98,22 +99,15 @@ export class RecipesComponent implements OnInit, OnDestroy {
     this.expandedRows = recipe ? { [recipe.id]: true} : {};
   }
 
-  getIcon(category: string) : string {
-    return IconUtils.getFAIngredientIcon(category);
-  }
-
+  // Floating card
   showFloatingCard(event: MouseEvent, ingredient: any) {
-    console.log("Show:", ingredient, event);
     this.selectedIngredient = ingredient;
     this.cardPosition = { x: event.clientX, y: event.clientY };
     this.showCard = true;
-    console.log("Show:", this.cardPosition);
   }
   
   hideFloatingCard(event: MouseEvent, ingredient: any) {
-    console.log("Hide:", ingredient, event);
     this.showCard = false;
-    console.log("Show:", this.cardPosition);
   }
 }
 

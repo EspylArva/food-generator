@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Recipe } from "../model/recipe";
-import { Observable, of } from "rxjs";
+import { map, Observable, of } from "rxjs";
 import RECIPES from "../../resources/recipes.json"
 import { Ingredient, IngredientCategory } from "../model/ingredient";
 
@@ -8,6 +8,11 @@ import { Ingredient, IngredientCategory } from "../model/ingredient";
     providedIn: 'root'
 })
 export class RecipeService {
+
+    private readonly ingredientFilter: (cats: IngredientCategory[]) => ((ingredient: Ingredient) => boolean) = (categories: IngredientCategory[]) => {
+        return (ingredient: Ingredient) => categories.map(category => ingredient.category === category).reduce((acc, current) => acc || current, false) 
+    }
+
     getIngredients(): Observable<Ingredient[]> {
         let ingredients = RECIPES
             .map(recipe => recipe.ingredients)
@@ -38,5 +43,41 @@ export class RecipeService {
         });
 
         return of(recipes);
+    }
+
+
+    getCarbsIngredients(): Observable<Ingredient[]> {
+        return this.getIngredients().pipe(
+            map<Ingredient[], Ingredient[]>(ingredients => ingredients.filter(this.ingredientFilter([IngredientCategory.grain])))
+        );
+    }
+
+    getVegetablesIngredients(): Observable<Ingredient[]> {
+        return this.getIngredients().pipe(
+            map<Ingredient[], Ingredient[]>(ingredients => ingredients.filter(this.ingredientFilter([IngredientCategory.vegetable, IngredientCategory.fruit])))
+        );
+    }
+
+    getProteinsIngredients(): Observable<Ingredient[]> {
+        return this.getIngredients().pipe(
+            map<Ingredient[], Ingredient[]>(ingredients => ingredients.filter(this.ingredientFilter([IngredientCategory.meat])))
+        );
+    }
+
+    getOptionalsIngredients(): Observable<Ingredient[]> {
+        return this.getIngredients().pipe(
+            map<Ingredient[], Ingredient[]>(ingredients => {
+                return ingredients.filter(ingredient => {
+                    return ![
+                        // Carbs
+                        IngredientCategory.grain,
+                        // Vegetables
+                        IngredientCategory.vegetable, IngredientCategory.fruit, 
+                        // Proteins
+                        IngredientCategory.meat, 
+                    ].includes(ingredient.category);
+                })
+            })
+        );
     }
 }

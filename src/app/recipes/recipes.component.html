@@ -99,13 +99,7 @@
                 </td>
                 <td>
                     @for (item of recipe.ingredients; track item) {
-                        <p-chip [ngClass]="{ 
-                            'prime-pill': true, 
-                            'meat': item.category === 'meat', 
-                            'vegetable': item.category === 'vegetable'
-                            }"
-                            [label]="item.id"
-                            [icon]="getIcon(item.category)"
+                        <ingredient-chip [ingredient]="item"
                             (mouseover)="showFloatingCard($event, item)"
                             (mouseleave)="hideFloatingCard($event, item)"/>
                     }
