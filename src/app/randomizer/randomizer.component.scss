@@ -23,7 +23,7 @@
         right: 5vh;
     };
 
-    --pill-accent: var(--electric-violet);
+    --pill-accent: var(--p-primary-color);
     background: color-mix(in srgb, var(--pill-accent) 45%, transparent);
     color: var(--pill-accent);
 
@@ -59,6 +59,15 @@
 }
 
 // Filters
+
+.toggle-filter-mode {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 .filters-container {
     display: flex;
     flex-direction: row;

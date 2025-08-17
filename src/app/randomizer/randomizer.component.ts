@@ -120,7 +120,8 @@ export class RandomizerComponent implements OnInit {
     if (this.isFilterRestrictive && filteredIngredients) {         // If filter is restrictive, add all selected ingredients
       return ingredients.filter(ingredient => filteredIngredients.some(i => i.label === ingredient.id));
     } else if (!this.isFilterRestrictive && filteredIngredients){  // If filter is inclusive, add a random ingredient among selection
-      return [ingredients.find(ingredient => ingredient.id === filteredIngredients[this.getRandom(filteredIngredients.length)].label)!];
+      const label = filteredIngredients[this.getRandom(filteredIngredients.length)].label;
+      return [ingredients.find(ingredient => ingredient.id === label)!];
     } else  {                                                      // If nothing selected, add a random ingredient from all available
       return [ingredients[this.getRandom(ingredients.length)]];
     }

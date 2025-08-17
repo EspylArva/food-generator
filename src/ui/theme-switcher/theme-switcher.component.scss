@@ -1,0 +1,44 @@
+// Container for the dark/light switch and the theme options
+.filling-card {
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    padding: var(--p-menubar-padding);
+
+    background: var(--card-bg);
+    border: 1px solid var(--p-menubar-border-color);
+    border-radius: 4px;
+
+    gap: 1rem;
+}
+
+// Popover container for theme options
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    width: min-content;
+
+    .primary-colors,
+    .surface-colors,
+    .preset-selector,
+    .ripple-effect-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .primary-colors {
+        flex-wrap: wrap;
+    }
+}
+
+.theme-button {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}

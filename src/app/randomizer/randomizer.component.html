@@ -7,11 +7,14 @@
         <ng-template #center>
         </ng-template>
         <ng-template #end>
-            <p-toggleswitch [(ngModel)]="isFilterRestrictive">
-                <ng-template #handle let-checked="checked">
-                    <i [ngClass]="['!text-xs', 'fa', checked ? 'fa-times' : 'fa-plus']"></i>
-                </ng-template>
-            </p-toggleswitch>
+            <div class="toggle-filter-mode">
+                <span>Filter mode: {{isFilterRestrictive ? 'Restrictive' : 'Additive'}}</span>
+                <p-toggleswitch [(ngModel)]="isFilterRestrictive">
+                    <ng-template #handle let-checked="checked">
+                        <i [ngClass]="['!text-xs', 'fa', checked ? 'fa-times' : 'fa-plus']"></i>
+                    </ng-template>
+                </p-toggleswitch>
+            </div>
         </ng-template>
     </p-toolbar>
     <div class="filters-container">
@@ -80,8 +83,6 @@
                     <ingredient-chip [ingredient]="item"
                             (mouseover)="showFloatingCard($event, item)"
                             (mouseleave)="hideFloatingCard($event, item)"/>
-                        <!-- (mouseover)="showFloatingCard($event, item)" -->
-                        <!-- (mouseleave)="hideFloatingCard($event, item)"/>  -->
                 }
             </td>
             <td><p-checkbox [(ngModel)]="recipe.keep" [binary]="true" /></td>

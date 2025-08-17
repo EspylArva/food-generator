@@ -86,7 +86,6 @@ This will compile your project and store the build artifacts in the `dist/` dire
     - [ ] Randomize using tags
     - [ ] Add History of generated recipes
         - [ ] Persist history
-
 - [ ] Recipes page
     - [ ] Hovering ingredient shows details
     - [x] Filtering and Ordering
@@ -96,12 +95,12 @@ This will compile your project and store the build artifacts in the `dist/` dire
 - [ ] Other pages
     - [ ] Home page
     - [ ] Contact & Information page
-    - [ ] Error page
+    - [x] Error page
 - [ ] Architecture
     - [ ] Support DB instead of local JSON
     - [ ] Add more checks on recipe and ingredient models
 - [ ] General
-    - [ ] Fix Light/Dark mode switcher
+    - [x] Fix Light/Dark mode switcher
     - [ ] Add and manage localizations
     - [ ] Add recipes
 

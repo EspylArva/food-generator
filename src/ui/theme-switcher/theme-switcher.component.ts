@@ -10,6 +10,8 @@ import { PrimeNG } from 'primeng/config';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { StyleClassModule } from 'primeng/styleclass';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { PopoverModule } from 'primeng/popover';
+
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 const presets = {
@@ -28,7 +30,7 @@ export interface ThemeState {
 
 @Component({
   selector: 'app-theme-switcher',
-  imports: [CommonModule, FormsModule, StyleClassModule, SelectButtonModule, ToggleSwitchModule],
+  imports: [CommonModule, FormsModule, StyleClassModule, SelectButtonModule, ToggleSwitchModule, PopoverModule],
   templateUrl: './theme-switcher.component.html',
   styleUrl: './theme-switcher.component.scss'
 })

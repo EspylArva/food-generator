@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Menubar } from 'primeng/menubar';
 import { FilterService, MenuItem } from 'primeng/api';
-import { ThemeSwitcherComponent } from './theme-switcher/theme-switcher.component';
-import { HomeComponent } from "./home/home.component";
+import { ThemeSwitcherComponent } from '../ui/theme-switcher/theme-switcher.component';
+import { Toolbar } from "primeng/toolbar";
 
 
 @Component({
@@ -11,7 +11,8 @@ import { HomeComponent } from "./home/home.component";
   imports: [
     RouterOutlet,
     Menubar,
-    ThemeSwitcherComponent
+    ThemeSwitcherComponent,
+    Toolbar
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,0 +1,15 @@
+.button-group {
+    display: flex; 
+    flex-direction: column; 
+    align-items: start; 
+    
+    gap: 0.5rem; 
+    margin-left: 3rem;
+    width: max-content;
+    
+    a {
+        text-decoration: none;
+        width: 100%;
+        justify-content: start;
+    }
+}

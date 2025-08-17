@@ -1,7 +1,13 @@
 <div class="main">
-    <app-theme-switcher style="display: none;"/>
-    
-    <p-menubar [model]="items" />
+    <p-toolbar >
+        <ng-template #start>
+            <p-menubar [model]="items" />
+        </ng-template>
+        <ng-template #center />
+        <ng-template #end>
+            <app-theme-switcher/>
+        </ng-template>
+    </p-toolbar>
     <router-outlet/>
     <!-- <app-home/> -->
 </div>
