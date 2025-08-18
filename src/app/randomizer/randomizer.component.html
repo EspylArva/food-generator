@@ -7,7 +7,7 @@
         <ng-template #center>
         </ng-template>
         <ng-template #end>
-            <div class="toggle-filter-mode">
+            <div class="toggle-filter-mode" [pTooltip]="filter_toggle_tooltip">
                 <span>Filter mode: {{isFilterRestrictive ? 'Restrictive' : 'Additive'}}</span>
                 <p-toggleswitch [(ngModel)]="isFilterRestrictive">
                     <ng-template #handle let-checked="checked">
@@ -93,3 +93,16 @@
     <app-floating-card *ngIf="showCard" [ingredient]="selectedIngredient" [position]="cardPosition"></app-floating-card>
 
 </div>
+
+<ng-template #filter_toggle_tooltip>
+    <div class="tooltip">
+        <div>
+            <i class="fa fa-times"></i>
+            <span><b>Restrictive</b>: all selected ingredients will be included.</span>
+        </div>
+        <div>
+            <i class="fa fa-plus"></i>
+            <span><b>Additive</b>: for each category, one random ingredient from the selected ingredients will be included.</span>
+        </div>
+    </div>
+</ng-template>

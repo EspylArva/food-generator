@@ -16,11 +16,9 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { MultiSelect } from 'primeng/multiselect';
 import { RecipeService } from '../services/recipe.service';
 import { Ingredient } from '../model/ingredient';
-import { IconUtils } from '../utils/icons';
 import { FloatingCardComponent } from '../../ui/floating-card/floating-card.component';
 import { IngredientChipComponent } from '../../ui/ingredient-card/ingredient-chip.component';
-
-
+import { Tooltip } from "primeng/tooltip";
 
 @Component({
   selector: 'app-randomizer',
@@ -29,7 +27,8 @@ import { IngredientChipComponent } from '../../ui/ingredient-card/ingredient-chi
     TreeModule, ToolbarModule,
     ToggleSwitchModule,
     CommonModule, FormsModule, CheckboxModule, MultiSelect,
-    TableModule
+    TableModule,
+    Tooltip
 ],
   templateUrl: './randomizer.component.html',
   styleUrl: './randomizer.component.scss'

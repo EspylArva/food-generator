@@ -66,6 +66,10 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+
+    span {
+        padding-right: 0.85rem;
+    }
 }
 
 .filters-container {
@@ -82,6 +86,34 @@
     }
     p-tree:first-child {
         border-left: none;
+    }
+}
+
+// Tooltip
+::ng-deep .p-tooltip-text {
+    background: var(--p-popover-background);
+    color: var(--p-popover-color);
+    padding: none;
+    margin: none;
+    border: 1px solid var(--p-popover-border-color);
+}
+
+.tooltip {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+
+    div {
+        display: flex;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--p-popover-color);
+        gap: 0.85rem;
+        align-items: center;
+        align-content: center;
+    }
+    div:last-child {
+        padding-bottom: 0px;
+        border-bottom: none;
     }
 }
 
@@ -108,3 +140,4 @@
         }
     }
 }
+

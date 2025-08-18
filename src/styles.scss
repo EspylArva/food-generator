@@ -54,4 +54,19 @@ body {
   border-radius: 4px;
   margin-bottom: 1rem;
 }
-    
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  align-items: center;
+  align-content: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: .85rem;
+  align-items: center;
+  align-content: center;
+}

@@ -8,11 +8,7 @@
     justify-content: space-around;
 
     padding: var(--p-menubar-padding);
-
-    background: var(--card-bg);
-    border: 1px solid var(--p-menubar-border-color);
-    border-radius: 4px;
-
+    background: var(--p-toolbar-background);
     gap: 1rem;
 }
 
